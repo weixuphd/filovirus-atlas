@@ -1,0 +1,126 @@
+/* FiloVirus Atlas — Nature-inspired editorial interface.
+   Serif typography, restrained dark-red accent, thin rules, no decoration. */
+
+:root {
+  --ink: #1a1a1a;
+  --ink-soft: #4a4a4a;
+  --muted: #6b7176;
+  --accent: #8b1a1a;          /* deep crimson */
+  --accent-soft: #f4e9e9;
+  --rule: #dedcd9;
+  --rule-strong: #b9b5b0;
+  --paper: #ffffff;
+  --paper-alt: #faf8f6;
+  --link: #2a5f8f;
+  --serif: Georgia, "Times New Roman", "STIX Two Text", serif;
+  --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--serif);
+  font-size: 16px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.container { max-width: 1080px; margin: 0 auto; padding: 0 24px; }
+
+/* ---------- masthead ---------- */
+.masthead { border-top: 4px solid var(--accent); border-bottom: 1px solid var(--rule-strong); padding: 20px 0 14px; }
+.masthead .brand { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+.masthead h1 { margin: 0; font-size: 34px; font-weight: 700; letter-spacing: 0.2px; }
+.masthead h1 .accent { color: var(--accent); }
+.masthead .subtitle { color: var(--muted); font-size: 14px; max-width: 620px; margin-top: 6px; }
+.masthead .datestamp { font-family: var(--sans); font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; }
+
+/* language toggle */
+.langtoggle { margin-top: 6px; display: inline-flex; border: 1px solid var(--rule-strong); }
+.langtoggle button { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.5px; padding: 3px 10px; border: none; background: #fff; color: var(--muted); cursor: pointer; }
+.langtoggle button.active { background: var(--accent); color: #fff; }
+
+/* ---------- navigation ---------- */
+nav { border-bottom: 1px solid var(--rule-strong); margin-bottom: 28px; }
+nav .tabs { display: flex; gap: 28px; overflow-x: auto; }
+nav .tab { font-family: var(--sans); font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.7px; color: var(--muted); padding: 11px 0; border-bottom: 3px solid transparent; cursor: pointer; white-space: nowrap; }
+nav .tab:hover { color: var(--ink); }
+nav .tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+/* ---------- sections ---------- */
+.section { display: none; margin-bottom: 48px; }
+.section.active { display: block; }
+
+h2.section-title { font-size: 22px; font-weight: 700; margin: 0 0 4px; }
+.section-lede { color: var(--muted); font-size: 14px; margin: 0 0 22px; max-width: 760px; }
+
+.rule { border: 0; border-top: 1px solid var(--rule-strong); margin: 28px 0; }
+
+/* ---------- stat tiles ---------- */
+.stats { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; margin-bottom: 28px; }
+.stat { border: 1px solid var(--rule); border-top: 3px solid var(--accent); padding: 14px 16px; background: var(--paper-alt); }
+.stat .value { font-size: 30px; font-weight: 700; line-height: 1.1; }
+.stat .label { font-family: var(--sans); font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; color: var(--muted); margin-top: 4px; }
+
+/* ---------- tables ---------- */
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+th { font-family: var(--sans); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); text-align: left; padding: 8px 10px; border-bottom: 2px solid var(--rule-strong); }
+td { padding: 8px 10px; border-bottom: 1px solid var(--rule); vertical-align: top; }
+tbody tr:hover { background: var(--paper-alt); }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.term { font-family: var(--sans); font-size: 12px; }
+
+/* ---------- search ---------- */
+.searchbar { display: flex; gap: 8px; margin-bottom: 18px; }
+.searchbar input { flex: 1; font-family: var(--serif); font-size: 15px; padding: 9px 12px; border: 1px solid var(--rule-strong); border-radius: 0; background: #fff; }
+.searchbar input:focus { outline: none; border-color: var(--accent); }
+.searchbar button { font-family: var(--sans); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; padding: 9px 18px; background: var(--accent); color: #fff; border: none; cursor: pointer; }
+.searchbar button:hover { background: #6f1414; }
+
+.result-count { font-family: var(--sans); font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+
+.paper { padding: 14px 0; border-bottom: 1px solid var(--rule); }
+.paper .title { font-weight: 700; font-size: 15px; }
+.paper .meta { font-family: var(--sans); font-size: 12px; color: var(--muted); margin: 4px 0; }
+.paper .abstract { font-size: 13px; color: var(--ink-soft); }
+.paper .tag { font-family: var(--sans); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); border: 1px solid var(--accent); padding: 1px 6px; margin-left: 8px; }
+
+/* ---------- evidence ontology ---------- */
+.cat { margin-bottom: 22px; }
+.cat h3 { font-size: 16px; margin: 0 0 8px; border-bottom: 1px solid var(--rule-strong); padding-bottom: 6px; }
+.cat h3 .count { color: var(--muted); font-weight: 400; font-size: 13px; }
+.etype { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--rule); }
+.etype .name { font-weight: 700; min-width: 220px; font-size: 14px; }
+.etype .def { color: var(--ink-soft); font-size: 13px; }
+
+/* ---------- AI-Ready data cards ---------- */
+.datacards { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 14px; }
+.card { border: 1px solid var(--rule); padding: 16px; background: var(--paper-alt); }
+.card h4 { margin: 0 0 6px; font-size: 15px; }
+.card .fields { font-family: var(--sans); font-size: 11px; color: var(--muted); margin: 6px 0 12px; }
+.card .dl { display: inline-block; font-family: var(--sans); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent); border: 1px solid var(--accent); padding: 5px 12px; }
+.card .dl:hover { background: var(--accent-soft); text-decoration: none; }
+.card .badge { font-family: var(--sans); font-size: 10px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); border: 1px solid var(--rule-strong); padding: 1px 6px; }
+
+/* ---------- SVG charts ---------- */
+.chart { width: 100%; }
+.chart .bar { fill: var(--accent); }
+.chart .axis text { font-family: var(--sans); font-size: 10px; fill: var(--muted); }
+.chart .axis line, .chart .axis path { stroke: var(--rule-strong); }
+
+.footer { border-top: 1px solid var(--rule-strong); padding: 20px 0 40px; color: var(--muted); font-size: 12px; font-family: var(--sans); margin-top: 40px; }
+
+.loading { color: var(--muted); font-style: italic; padding: 24px 0; }
+
+@media (max-width: 640px) {
+  .masthead h1 { font-size: 26px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .etype { flex-direction: column; gap: 2px; }
+  .etype .name { min-width: 0; }
+}

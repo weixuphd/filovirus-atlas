@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>FiloVirus Atlas</title>
+  <link rel="stylesheet" href="./static/style.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="container">
+      <div class="brand">
+        <div>
+          <h1>FiloVirus <span class="accent">Atlas</span></h1>
+          <p class="subtitle" data-i18n="brand.subtitle"></p>
+        </div>
+        <div style="text-align:right">
+          <div class="datestamp" id="datestamp"></div>
+          <div class="langtoggle" id="langToggle">
+            <button data-lang="en">EN</button><button data-lang="zh">中文</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <nav>
+    <div class="container tabs" id="tabs">
+      <div class="tab active" data-view="overview" data-i18n="nav.overview"></div>
+      <div class="tab" data-view="viruses" data-i18n="nav.viruses"></div>
+      <div class="tab" data-view="evolution" data-i18n="nav.evolution"></div>
+      <div class="tab" data-view="mutations" data-i18n="nav.mutations"></div>
+      <div class="tab" data-view="structures" data-i18n="nav.structures"></div>
+      <div class="tab" data-view="sequences" data-i18n="nav.sequences"></div>
+      <div class="tab" data-view="evidence" data-i18n="nav.evidence"></div>
+      <div class="tab" data-view="literature" data-i18n="nav.literature"></div>
+      <div class="tab" data-view="data" data-i18n="nav.data"></div>
+      <div class="tab" data-view="governance" data-i18n="nav.governance"></div>
+      <div class="tab" data-view="about" data-i18n="nav.about"></div>
+    </div>
+  </nav>
+
+  <main class="container">
+
+    <!-- Overview -->
+    <section class="section active" id="view-overview">
+      <h2 class="section-title" data-i18n="overview.title"></h2>
+      <p class="section-lede" data-i18n="overview.lede"></p>
+      <div class="stats" id="stats"></div>
+      <div id="dailySummary"></div>
+      <hr class="rule">
+      <h3 style="font-size:15px" data-i18n="overview.chartTitle"></h3>
+      <svg class="chart" id="yearChart" viewBox="0 0 1000 220"></svg>
+    </section>
+
+    <!-- Viruses -->
+    <section class="section" id="view-viruses">
+      <h2 class="section-title" data-i18n="viruses.title"></h2>
+      <p class="section-lede" data-i18n="viruses.lede"></p>
+      <div id="viruses"></div>
+    </section>
+
+    <!-- Evolution -->
+    <section class="section" id="view-evolution">
+      <h2 class="section-title" data-i18n="evolution.title"></h2>
+      <p class="section-lede" data-i18n="evolution.lede"></p>
+      <div class="stats" id="phyloStats"></div>
+      <div style="overflow:auto;max-height:900px;border:1px solid var(--rule);background:#fff;padding:8px">
+        <img id="phyloImg" alt="phylogenetic tree" style="width:100%;max-width:760px;display:block;margin:0 auto">
+      </div>
+      <p class="term" style="color:var(--muted);margin-top:10px" id="phyloNote"></p>
+    </section>
+
+    <!-- Mutations & pathogenicity -->
+    <section class="section" id="view-mutations">
+      <h2 class="section-title" data-i18n="mutations.title"></h2>
+      <p class="section-lede" data-i18n="mutations.lede"></p>
+      <div style="border:1px solid var(--rule);background:#fff;padding:8px;margin-bottom:18px">
+        <img id="pathoImg" alt="mutation-pathogenicity" style="width:100%;max-width:1000px;display:block;margin:0 auto">
+      </div>
+      <h3 style="font-size:15px" data-i18n="mutations.topRisk"></h3>
+      <div id="riskTable"></div>
+      <hr class="rule">
+      <h3 style="font-size:15px" data-i18n="mutations.seqTitle"></h3>
+      <div style="margin:10px 0" id="seqGeneFilter"></div>
+      <div id="seqMutations"></div>
+    </section>
+
+    <!-- Structures -->
+    <section class="section" id="view-structures">
+      <h2 class="section-title" data-i18n="structures.title"></h2>
+      <p class="section-lede" data-i18n="structures.lede"></p>
+      <div id="structSummary"></div>
+      <div style="margin:10px 0" id="structFilter"></div>
+      <div id="structTable"></div>
+      <hr class="rule">
+      <h3 style="font-size:15px" data-i18n="structures.epitopeTitle"></h3>
+      <div id="epitopes"></div>
+    </section>
+
+    <!-- Evidence -->
+    <section class="section" id="view-evidence">
+      <h2 class="section-title" data-i18n="evidence.title"></h2>
+      <p class="section-lede" data-i18n="evidence.lede"></p>
+      <div id="evidenceTypes"></div>
+    </section>
+
+    <!-- Literature -->
+    <section class="section" id="view-literature">
+      <h2 class="section-title" data-i18n="literature.title"></h2>
+      <p class="section-lede" data-i18n="literature.lede"></p>
+      <div style="border:1px solid var(--rule);border-left:3px solid var(--accent);padding:14px 16px;background:var(--paper-alt);margin-bottom:20px">
+        <label style="font-family:var(--sans);font-size:11px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)"><span data-i18n="literature.askLabel"></span> <span id="llmModel" style="text-transform:none;color:var(--accent)"></span></label>
+        <div class="searchbar" style="margin-top:8px;margin-bottom:0">
+          <input id="askBox" type="text" data-i18n-ph="literature.askPlaceholder">
+          <button id="askBtn" data-i18n="literature.askBtn"></button>
+        </div>
+        <div id="askAnswer" style="margin-top:10px;font-size:13px;color:var(--ink-soft)"></div>
+      </div>
+      <div class="searchbar">
+        <input id="searchBox" type="text" data-i18n-ph="literature.searchPlaceholder">
+        <button id="searchBtn" data-i18n="literature.searchBtn"></button>
+      </div>
+      <div class="result-count" id="resultCount"></div>
+      <div id="paperResults"></div>
+    </section>
+
+    <!-- AI-Ready data -->
+    <section class="section" id="view-data">
+      <h2 class="section-title" data-i18n="data.title"></h2>
+      <p class="section-lede" data-i18n="data.lede"></p>
+      <div class="datacards" id="datacards"></div>
+    </section>
+
+    <!-- Governance -->
+    <section class="section" id="view-governance">
+      <h2 class="section-title" data-i18n="governance.title"></h2>
+      <p class="section-lede" data-i18n="governance.lede"></p>
+      <div class="stats" id="govSummary"></div>
+      <div id="govMetrics"></div>
+    </section>
+
+    <!-- About -->
+    <section class="section" id="view-about">
+      <h2 class="section-title" data-i18n="about.title"></h2>
+      <div id="aboutBody"></div>
+    </section>
+
+    <!-- Sequences -->
+    <section class="section" id="view-sequences">
+      <h2 class="section-title" data-i18n="sequences.title"></h2>
+      <p class="section-lede" data-i18n="sequences.lede"></p>
+      <div class="stats" id="seqStats"></div>
+      <div style="margin:12px 0" id="seqModeToggle"></div>
+      <div class="searchbar" style="margin-bottom:12px">
+        <input id="seqSearch" type="text" data-i18n-ph="sequences.searchPh">
+        <button id="seqSearchBtn" data-i18n="sequences.searchBtn"></button>
+      </div>
+      <div id="seqFilters" style="margin-bottom:12px"></div>
+      <div id="seqTable"></div>
+      <div id="seqViewer" style="display:none;margin-top:18px;border:1px solid var(--rule);padding:14px"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container"><span data-i18n="footer"></span> <span id="footerDate"></span>.</div>
+  </footer>
+
+  <script src="./static/static_api.js"></script>
+  <script src="./static/app.js"></script>
+</body>
+</html>
